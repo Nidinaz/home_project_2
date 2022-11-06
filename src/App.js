@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+const pokeJson = require("./Poke.json");
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const pk = pokeJson.pokemon.map((poke) => {
+    return <Poke poke={poke}></Poke>;
+  });
+  return <div>{pk}</div>;
 }
+
+//object of Poke using prop
+//way depends on the file above
+const Poke = (props) => {
+  return <div>{props.poke.pokemon.name}</div>;
+};
 
 export default App;
