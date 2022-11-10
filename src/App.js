@@ -10,14 +10,14 @@ const App = () => {
     <div>
       <button
         onClick={() => {
-          setResponse(<Poke key={Math.random()} pokemon={"1"}></Poke>);
+          setResponse(<Poke key={Math.random()} pokemon={"ditto"}></Poke>);
         }}
       >
         Pokemon
       </button>
       <button
         onClick={() => {
-          setResponse(<Poke key={Math.random()} pokemon={"2"}></Poke>);
+          setResponse(<Poke key={Math.random()} pokemon={"pidgey"}></Poke>);
         }}
       >
         Pokemon 2
@@ -32,7 +32,7 @@ const Poke = (props) => {
   const [Pokemon, setPokemon] = useState();
   if (!Pokemon) {
     axios
-      .get("https://pokeapi.co/api/v2/pokedex/" + props.pokemon)
+      .get("https://pokeapi.co/api/v2/pokemon/" + props.pokemon)
       .then((response) => {
 
         //desturcting response into data it is an JS feature
@@ -49,7 +49,11 @@ const Poke = (props) => {
                               }
                           },
          * */
-        const pokemon = data.pokemon_entries.map((pokemonJson) => <div>{pokemonJson.pokemon_species.name}</div>)
+        const pokemon = data.abilities.map((ability) => {
+          return <div>{ability.name}</div>
+        })
+        
+        // const pokemon = data.pokemon_entries.map((pokemonJson) => <div>{pokemonJson.pokemon_species.name}</div>)
 
         setPokemon(
           <div>
