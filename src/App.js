@@ -34,6 +34,7 @@ const Poke = (props) => {
       .get("https://pokeapi.co/api/v2/pokedex/" + props.pokemon)
       .then((response) => {
 
+        //desturcting response into data it is an JS feature
         const {data} = response
 
         // pokemonJson
