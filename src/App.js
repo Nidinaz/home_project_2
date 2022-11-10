@@ -11,63 +11,49 @@ const App = () => {
       {response}
       <button
         onClick={() => {
-          //setResponse from useState
-          setResponse(<Poke pokemon={'name'}></Poke>);
+          setResponse(<Poke pokemon={"1"}></Poke>);
         }}
       >
         Pokemon
+      </button>
+      <button
+        onClick={() => {
+          setResponse(<Poke pokemon={"2"}></Poke>);
+        }}
+      >
+        Pokemon 2
       </button>
     </div>
   );
 };
 
-// const Header = (props) => {
-//   return (
-//     <div>
-//       <div>{props.pokemon.pokemon.name}</div>
-//       <img src={props.pokemon.pokemon.url} alt={props.poke.pokemon.name} />
-//     </div>
-//   );
-// };
-
-//object of Poke using prop
-//way depends on the file above
-//the img cointains an url json link, warning about cross-origin read Blokking in console
-
-// const Pokemons = (props) => {
-//   const [Pokemons, setPokemons] = useStat();
-//   if (!Pokemons) {
-//     axios
-//       .get("https://pokeapi.co/api/v2/pokedex/2"+props.name)
-//       .then((response) => {
-//         const pokemon = response.pokemon_entries.pokemon_species.name
-//       })
-//       setPokemon(
-//         <div>
-//           {pokemon}
-//         </div>
-//       )
-//   })
-// }
-
-
 const Poke = (props) => {
   const [Pokemon, setPokemon] = useState();
   if (!Pokemon) {
     axios
-      .get("https://pokeapi.co/api/v2/pokedex/2"+props.name)
+      .get("https://pokeapi.co/api/v2/pokedex/" + props.pokemon)
       .then((response) => {
-        console.log(response)
-        console.log(response.);
-        const pokemon = response.data
 
-        const types = pokemon.types.map((type) => {
-          return <div>{type.type.name}</div>;
-        });
-        setPokemon(<div>
-          {pokemon.name}
-          {types}
-        </div>);
+        const {data} = response
+
+        // pokemonJson
+        /**
+         * 
+                          {
+                              "entry_number": 1,
+                              "pokemon_species": {
+                                  "name": "bulbasaur",
+                                  "url": "https://pokeapi.co/api/v2/pokemon-species/1/"
+                              }
+                          },
+         * */
+        const pokemon = data.pokemon_entries.map((pokemonJson) => <div>{pokemonJson.pokemon_species.name}</div>)
+
+        setPokemon(
+          <div>
+            {pokemon}
+          </div>
+        );
       })
       .catch((e) => {
         console.log("Error: " + e);
@@ -77,26 +63,3 @@ const Poke = (props) => {
 };
 
 export default App;
-
-// const pokeJson = require("./Poke.json");
-
-// const App = () => {
-//   const pk = pokeJson.pokemon.map((poke) => {
-//     return <Poke poke={poke}></Poke>;
-//   });
-//   return <div>{pk}</div>;
-// }
-
-// //object of Poke using prop
-// //way depends on the file above
-// //the img cointains an url json link, warning about cross-origin read Blokking in console
-// const Poke = (props) => {
-//   return (
-//   <div>
-//   <div>{props.poke.pokemon.name}</div>
-//   <img src={props.poke.pokemon.url} alt={props.poke.pokemon.name}/>
-//   </div>
-//   )
-// };
-
-// export default App;
