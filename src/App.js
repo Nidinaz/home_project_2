@@ -8,21 +8,22 @@ const App = () => {
   //return the button and its answer
   return (
     <div>
-      {response}
       <button
         onClick={() => {
-          setResponse(<Poke pokemon={"1"}></Poke>);
+          setResponse(<Poke key={Math.random()} pokemon={"1"}></Poke>);
         }}
       >
         Pokemon
       </button>
       <button
         onClick={() => {
-          setResponse(<Poke pokemon={"2"}></Poke>);
+          setResponse(<Poke key={Math.random()} pokemon={"2"}></Poke>);
         }}
       >
         Pokemon 2
       </button>
+
+      {response}
     </div>
   );
 };
